@@ -1,0 +1,29 @@
+name: Deployment step version 2
+on: 
+  push:
+    branches:
+      - master
+jobs: 
+  lint:
+  runs-on: ubuntu-latest
+  steps:
+    - name: Get code
+      uses: actions/checkout@v3
+    - name: Install dependencies
+      run: npm ci
+    - name: Lint
+      run: npm run link
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get code
+        uses: actions/checkout@v3
+      - name: Install dependencies
+        run: npm ci
+      - name: Build Code
+        run: npm run build
+  deploy:
+    runs-on: ubuntu-latest
+    steps:   
+      - name: Output log
+        run: echo "Deployment completed successfully"
